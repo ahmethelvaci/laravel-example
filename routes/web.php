@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\MerhabaController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,4 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [MerhabaController::class, 'index']);
 Route::get('/create', [MerhabaController::class, 'create']);
 Route::get('/destroy/{id}', [MerhabaController::class, 'destroy']);
+Route::resource('books', BookController::class)
+    ->missing(function (Request $request) {
+        return Redirect::route('books.index');
+    });
 
